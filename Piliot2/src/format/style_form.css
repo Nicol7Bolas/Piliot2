@@ -1,0 +1,77 @@
+/* --------------- GENERAL DESIGN --------------- */
+table { border-collapse: collapse; }
+table, td, th { border: 1px solid black; }
+header { margin-left: 150px; }
+body
+{
+  background-image: url(images/connected_city.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100%;
+  font-family: Poppins-Regular, sans-serif;
+  background-size: 100%;
+}
+/* --------------- SECTION DESIGN --------------- */
+.section {
+  color: #000070;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: bold;
+  margin-left: 50px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+/* --------------- SUB SECTION DESIGN --------------- */
+.sub_section {
+  border-width: 1.5px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: teal;
+  padding-left: 50px;
+  padding-top: 10px;
+  padding-right: 10px;
+  font-size: 15px; 
+  margin-bottom: 20px
+}
+/* --------------- NUMBER DESIGN --------------- */
+.classnumber1 {
+  margin-left: 4px;
+  margin-right: 4px;
+  border-width: 1px;
+  border-radius: 3px;
+  width: 60px;
+  height: 14px;
+  border-style: solid;
+  border-color: black;
+}
+/* --------------- DETAIL UNDER QUESTION DESIGN --------------- */
+.detail {
+  color: #000070;
+  font-size: 13px;
+  font-family: Poppins-Regular, sans-serif;
+  margin-bottom: 12px;
+}
+/* --------------- SUB INPUT DESIGN --------------- */
+.subinput {
+  font-family: Poppins-Regular;
+  font-size: 15px;
+  color: #555555;
+  line-height: 1.2;
+  display: block;
+  width: 100%;
+  background: transparent;
+  padding-bottom: 15px;
+}
+/* --------------- TOOGLE BUTTON DESIGN --------------- */
+.toggle_basic {
+	margin-left: 50px;
+	width: 260px;
+	height: 40px;
+	border-radius: 5px;
+	border-color: black;
+	border-width: 2px;
+	border-style: solid;
+	padding-top: 8px;
+	padding-left: 2px;
+	margin-bottom: 18px;
+}
