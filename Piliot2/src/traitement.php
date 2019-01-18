@@ -247,7 +247,7 @@
 				echo '<td class="cell100 column3"><a href = capteur/'.$element->model.'.pdf target="_blank">Download</a></td>';
 				echo '<td class="cell100 column4"><a href = capteur/'.$element->model.'.pdf target="_blank">Download</a></td>';
 				echo '<td class="cell100 column5"><a href = capteur/'.$element->model.'.pdf target="_blank">Download</a></td>';
-				echo '<td class="cell100 column6">'.$element->recommendation.'<a href=""><img src="format/images/yes.jpg"/></a><a><img src="format/images/no.png"/></a></td></tr>';
+				echo '<td class="cell100 column6">'.$element->recommendation;
 			}
 		}
 	}

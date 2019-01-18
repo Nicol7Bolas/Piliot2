@@ -215,16 +215,36 @@
 			
 			<div>
 				<b>In what environment will the device be used ?</b><br><br>
-				<label class="container"><input type="checkbox" name="environment[]" value="outside"/>Only outside<span class="checkmark"></span></label>
-				<label class="container"><input type="checkbox" name="environment[]" value="inside"/>Only inside<span class="checkmark"></span></label>
-				<label class="container"><input type="checkbox" name="environment[]" value="outside&inside"/>Outside and inside<span class="checkmark"></span></label>
+				<label class="container"><input type="checkbox" id="inside" name="environment[]" value="outside"/>Only outside<span class="checkmark"></span></label>
+				<label class="container"><input type="checkbox" id="outside" name="environment[]" value="inside"/>Only inside<span class="checkmark"></span></label>
+				<label class="container"><input type="checkbox" id="outside&inside" name="environment[]" value="outside&inside"/>Outside and inside<span class="checkmark"></span></label>
 				<label class="container"><input type="checkbox" name="environment[]" value="urban"/>Urban<span class="checkmark"></span></label>
 				<label class="container"><input type="checkbox" name="environment[]" value="country"/>Countryside<span class="checkmark"></span></label>
 				<label class="container"><input type="checkbox" name="environment[]" value="isolated"/>Isolated area<span class="checkmark"></span></label>
 				<label class="container"><input type="checkbox" name="environment[]" value="industrial"/>Industrial<span class="checkmark"></span></label>
 				<label class="container"><input type="checkbox" name="environment[]" value="underground"/>Underground<span class="checkmark"></span></label>
-				<label class="container"><input type="checkbox" name="environment[]" value="aerial"/>Aerial area<span class="checkmark"></span></label>
+				<label class="container"><input onClick="display_2('aerial',7)" id="aerial7" type="checkbox" name="environment[]" value="aerial"/>Aerial area<span class="checkmark"></span></label>
+                    <div class="toggle_basic" id="aerial" style="display:none">
+                        <div id="add7" onclick="switch_basic('add',7)">Click to add technicals constraints</div>
+                        <div id="hide7" onclick="switch_basic('hide',7)" style="display:none">Click to hide technicals constraints</div>
+                    </div>
+                    <div class="sub_section" style="display:none">
+                        <div class="inside">
+                            <label class="container"><input type="checkbox" name="environment[]" value="aerial"/>En Soute<span class="checkmark"></span></label>
+                            <label class="container"><input type="checkbox" name="environment[]" value="aerial"/>En cabine<span class="checkmark"></span></label>
+                        </div>
+                        <div class="outside">
+                            <label class="container"><input type="checkbox" name="environment[]" value="aerial"/>Proximité des moteurs<span class="checkmark"></span></label>
+                            <label class="container"><input type="checkbox" name="environment[]" value="aerial"/>Proximité des reacteurs<span class="checkmark"></span></label>
+                            <label class="container"><input type="checkbox" name="environment[]" value="aerial"/>Utilisation en vole<span class="checkmark"></span></label>
+                            <label class="container"><input type="checkbox" name="environment[]" value="aerial"/>Utilisation au sol<span class="checkmark"></span></label>
+                        </div>
+                    </div>
 				<label class="container"><input type="checkbox" name="environment[]" value="maritime"/>Maritime<span class="checkmark"></span></label>
+                    <div class="sub_section">
+                        <label class="container"><input type="checkbox" name="environment[]" value="aerial"/>Immergé<span class="checkmark"></span></label>
+                    </div>
+
 				<label class="container"><input type="checkbox" name="environment[]" value="space"/>Space<span class="checkmark"></span></label>
 				<label class="container"><input type="checkbox" name="environment[]" value="submarine"/>Submarine<span class="checkmark"></span></label>
 				<input type="checkbox" name="environment[]" checked value="idk" style="display:none"/>
