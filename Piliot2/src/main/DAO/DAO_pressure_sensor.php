@@ -2,7 +2,7 @@
 require_once('Request_data.php');
 function f_condition_pressure($cti,$data)
 {
-    $conditions = ""; $used = 0; $terms = 0; $comp = 0;
+    $conditions = ""; $used = 0; $terms = 0; $comp = 0; $error = array();
     $out = array();
     if ($data->minimum_temperature != "") {
         $terms += $data->temperatureI; $comp++;

@@ -16,3 +16,7 @@ function f_creation_recommendation($email,$sensor){
 	$request = "INSERT INTO recommendation (`email`,`recommend`) VALUES ('".$email."','/".$sensor."')";
 	return $request;
 }
+function f_checking_sensor($class,$sensor){
+	$request = "SELECT COUNT(*) as c FROM $class WHERE `model` = $sensor";
+	return $request;
+}

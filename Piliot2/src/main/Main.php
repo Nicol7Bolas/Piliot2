@@ -147,19 +147,19 @@ function f_terms_humidity($data){
 
 function f_request($conditions, $percentage, $sensor){
     $out = array();
-    $query = 'SELECT model,recommendation FROM '.$sensor.' WHERE model != "" '.$conditions;
+    $query = 'SELECT model,recommendation,communication FROM '.$sensor.' WHERE model != "" '.$conditions;
     $response = $GLOBALS['bdd']->query($query);
     if(!$response) { return null; }
     else {
         while ($data = $response->fetch()) {
-            $out[count($out)] = new Results($data['model'],$percentage,array(),$data['recommendation']);
+            $out[count($out)] = new Results($data['model'],$percentage,array(),$data['recommendation'],$data['communication']);
         }
     }
-    if (count($out) == 0) { $out[0] = new Results("",0,array()); }
+    if (count($out) == 0) { $out[0] = new Results("",0,array(),"",""); }
     return $out;
 }
 
-function f_table($sensor,$sensors){
+function f_table($sensor,$sensors,$communication_selected){
     $out = array();
     $combinaison_list = f_generate_combinaison($sensor,$sensors);
     if ($sensor === "pressure_sensor") {
@@ -187,16 +187,6 @@ function f_table($sensor,$sensors){
         foreach ($combinaison_list as $combinaison) {
             $condition = f_condition_shield($combinaison,$sensors->shield_sensor);
             $temp = f_request($condition[0],$condition[1],$sensor);
-            if ($temp[0] != "") {
-                $out = $temp;
-            }
-        }
-    }
-    if ($sensor === "communication_tools") {
-        if (count($combinaison_list) === 0) { $combinaison_list[0] = 0; }
-        foreach ($combinaison_list as $combinaison) {
-            $condition = f_condition_communication($combinaison,$sensors->communication_tools);
-            $temp = f_request($condition->conditions,$condition->percentage,$sensor);
             if ($temp[0] != "") {
                 $out = $temp;
             }
@@ -254,5 +244,21 @@ function f_table($sensor,$sensors){
     }
     $out = f_sort_order($out);
     $out = f_sort_sensor($out);
+    //$out = f_filtering_communication($out,$communication_selected);
     return $out;
+}
+
+function f_filtering_communication($tab,$communication_selected){
+    $table = $tab;
+    foreach($table as $sensor){
+        $temp = array();
+        $communication = $sensor->communication;
+        foreach($communication_selected as $com){
+            if (\strpos($communication,$com)){
+                $temp[(count($temp))] = $com;
+            }
+        }
+        $sensor->communication = $temp;
+    }
+    return $table;
 }

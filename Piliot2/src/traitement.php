@@ -1,4 +1,4 @@
-<!DOCTYPE php>
+	<!DOCTYPE php>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -33,6 +33,7 @@
     require_once('main/Class/Humidity_sensor.php');
     require_once('main/Class/Position_sensor.php');
     require_once('main/Class/Results.php');
+    require_once('main/Controller/Tools.php');
     require_once('main/Main.php');
 
 	//connection bdd 
@@ -47,6 +48,7 @@
     //all sensor
 
     $weight = "";
+    $communication_selected = array("3G","4G");
     $materials = array();
     $protection_id = "";
     $shock_resistance = "";
@@ -121,22 +123,21 @@
 
 	//QUESTION ANALYZE
 
-	if ($_POST['sensor'][0] == "idk") { $sensor = array("distance_sensor","position_sensor","humidity_sensor","movement_sensor","pressure_sensor","shield_sensor","passage_sensor","temperature_sensor","communication_tools"); }
+	if (decode_string_to_list($_POST['sensor'])[0] == "idk") { $sensor = array("distance_sensor","position_sensor","humidity_sensor","movement_sensor","pressure_sensor","shield_sensor","passage_sensor","temperature_sensor"); }
 	else {
-		foreach($_POST['sensor'] as $element) {
+		foreach(decode_string_to_list($_POST['sensor']) as $element) {
 			if($element != "idk") { $sensor[count($sensor)] = $element;}
 		}
 	}
-	
-	if ($_POST['environment'][0] != "idk") {
-		foreach($_POST['environment'] as $element) {
+    if (decode_string_to_list($_POST['environment'])[0] != "idk") {
+		foreach(decode_string_to_list($_POST['environment']) as $element) {
 			if ($element == "") {
 			    continue;
 			}
 		}
 	}
 	if ($_POST['use'][0] != "idk") {
-		foreach($_POST['use'] as $element) {
+		foreach(decode_string_to_list($_POST['use']) as $element) {
 			if ($element == "france") {
 				$temperatureI = 3;
 				if ($temperature_max != "" && $temperature_max < 44) { $temperature_max = 44; }
@@ -177,7 +178,7 @@
 		}
 	}
 	if ($_POST['connection'][0] != "idk") {
-		foreach($_POST['connection'] as $element) {
+		foreach(decode_string_to_list($_POST['connection']) as $element) {
 			if ($element == "") {
 			    continue;
             }
@@ -192,8 +193,8 @@
 			}
 		}
 	}*/
-	if ($_POST['frequency'][0] != "idk") {
-		foreach($_POST['frequency'] as $element) {
+	if (decode_string_to_list($_POST['frequency'])[0] != "idk") {
+		foreach(decode_string_to_list($_POST['frequency']) as $element) {
 			if ($element == "permanently") {
 				$number_message_per_day = -1;
 				$permanently_connected = 1;
@@ -225,20 +226,19 @@
 	}
 
 	//DISPLAY WORKING
-
 	$communication_tools = new Communication_tools();
     $distance_sensor = new Distance_sensor($_POST['range_distance'], $_POST['accuracy_distance'], $_POST['sampling_speed_distance'], $_POST['max_lighting_distance'], $_POST['temperature_sensitivity_distance'],$weight, $materials, $protection_id, $shock_resistance, $minimum_frequency_resistance, $maximum_frequency_resistance, $minimum_humidity, $maximum_humidity, $minimum_temperature, $maximum_temperature, $minimum_temperature_storage, $maximum_temperature_storage, $power_consumption, $shock_resistanceI, $frequency_resistanceI, $humidity_storageI, $temperature_storageI, $temperatureI, $weightI, $power_consumptionI,$humidityI);
     $movement_sensor = new Movement_sensor($_POST['range_distance'], $_POST['accuracy_distance'], $_POST['sampling_speed_distance'], $_POST['max_lighting_distance'], $_POST['temperature_sensitivity_movement'],$weight, $materials, $protection_id, $shock_resistance, $minimum_frequency_resistance, $maximum_frequency_resistance, $minimum_humidity, $maximum_humidity, $minimum_temperature, $maximum_temperature, $minimum_temperature_storage, $maximum_temperature_storage, $power_consumption, $shock_resistanceI, $frequency_resistanceI, $humidity_storageI, $temperature_storageI, $temperatureI, $weightI, $power_consumptionI,$humidityI);
     $pressure_sensor = new Pressure_sensor("",$_POST['minimum_pressure'], $_POST['maximum_pressure'],$weight, $materials, $protection_id, $shock_resistance, $minimum_frequency_resistance, $maximum_frequency_resistance, $minimum_humidity, $maximum_humidity, $minimum_temperature, $maximum_temperature, $minimum_temperature_storage, $maximum_temperature_storage, $power_consumption, $shock_resistanceI, $frequency_resistanceI, $humidity_storageI, $temperature_storageI, $temperatureI, $weightI, $power_consumptionI,$humidityI);
     $shield_sensor = new Shield_sensor($_POST['max_lighting_shield'], $_POST['spacing_axes_shield'], $_POST['size_detection_shield'], $_POST['range_shield'],$weight, $materials, $protection_id, $shock_resistance, $minimum_frequency_resistance, $maximum_frequency_resistance, $minimum_humidity, $maximum_humidity, $minimum_temperature, $maximum_temperature, $minimum_temperature_storage, $maximum_temperature_storage, $power_consumption, $shock_resistanceI, $frequency_resistanceI, $humidity_storageI, $temperature_storageI, $temperatureI, $weightI, $power_consumptionI,$humidityI);
     $temperature_sensor = new Temperature_sensor("","", "", "",$weight, $materials, $protection_id, $shock_resistance, $minimum_frequency_resistance, $maximum_frequency_resistance, $minimum_humidity, $maximum_humidity, $minimum_temperature, $maximum_temperature, $minimum_temperature_storage, $maximum_temperature_storage, $power_consumption, $shock_resistanceI, $frequency_resistanceI, $humidity_storageI, $temperature_storageI, $temperatureI, $weightI, $power_consumptionI,$humidityI);
-    $passage_sensor = new Passage_sensor($_POST['range_passage'], $_POST['$reaction_delay_passage'], $weight, $materials, $protection_id, $shock_resistance, $minimum_frequency_resistance, $maximum_frequency_resistance, $minimum_humidity, $maximum_humidity, $minimum_temperature, $maximum_temperature, $minimum_temperature_storage, $maximum_temperature_storage, $power_consumption, $shock_resistanceI, $frequency_resistanceI, $humidity_storageI, $temperature_storageI, $temperatureI, $weightI, $power_consumptionI,$humidityI);
+    $passage_sensor = new Passage_sensor($_POST['range_passage'], $_POST['reaction_delay_passage'], $weight, $materials, $protection_id, $shock_resistance, $minimum_frequency_resistance, $maximum_frequency_resistance, $minimum_humidity, $maximum_humidity, $minimum_temperature, $maximum_temperature, $minimum_temperature_storage, $maximum_temperature_storage, $power_consumption, $shock_resistanceI, $frequency_resistanceI, $humidity_storageI, $temperature_storageI, $temperatureI, $weightI, $power_consumptionI,$humidityI);
     $humidity_sensor = new Humidity_sensor("","",$weight, $materials, $protection_id, $shock_resistance, $minimum_frequency_resistance, $maximum_frequency_resistance, $minimum_humidity, $maximum_humidity, $minimum_temperature, $maximum_temperature, $minimum_temperature_storage, $maximum_temperature_storage, $power_consumption, $shock_resistanceI, $frequency_resistanceI, $humidity_storageI, $temperature_storageI, $temperatureI, $weightI, $power_consumptionI,$humidityI);
     $position_sensor = new Position_sensor("","","","","",$weight, $materials, $protection_id, $shock_resistance, $minimum_frequency_resistance, $maximum_frequency_resistance, $minimum_humidity, $maximum_humidity, $minimum_temperature, $maximum_temperature, $minimum_temperature_storage, $maximum_temperature_storage, $power_consumption, $shock_resistanceI, $frequency_resistanceI, $humidity_storageI, $temperature_storageI, $temperatureI, $weightI, $power_consumptionI,$humidityI);
     $sensors = new Sensors($distance_sensor,$position_sensor,$humidity_sensor,$movement_sensor,$passage_sensor,$pressure_sensor,$shield_sensor,$temperature_sensor,$communication_tools);
 
 	function f_table_display($sensor,$sensors) {
-		$data = f_table($sensor,$sensors);
+		$data = f_table($sensor,$sensors,$GLOBALS['communication_selected']);
 		foreach($data as $element){
 			if ($element->percentage > $GLOBALS['display']){
 				echo '<tr class="row100 body">';

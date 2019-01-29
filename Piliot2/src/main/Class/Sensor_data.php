@@ -15,6 +15,7 @@ class Sensor_data
     public $minimum_temperature_storage;
     public $maximum_temperature_storage;
     public $power_consumption;
+    public $communication_selected;
 
     public $shock_resistanceI = 1;
     public $frequency_resistanceI = 1;

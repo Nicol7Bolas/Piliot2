@@ -71,3 +71,30 @@ function f_sort_sensor($table)
     }
     return $out;
 }
+
+function encode_list_to_string($list) {
+    if (count($list) == 0){
+        return "";
+    }
+    $output = "";
+    foreach($list as $element) {
+        $output = $output.$element."/";
+    }
+    return $output;
+}
+
+function decode_string_to_list($string){
+    $output = array();
+    $temp = "";
+    for($i = 0; $i < strlen($string); $i++){
+        $char = $string[$i];
+        if ($char != "/") {
+            $temp = $temp.$char;
+        }
+        if ($char == "/"){
+            $output[count($output)] = $temp;
+            $temp = "";
+        }
+    }
+    return $output;
+}
