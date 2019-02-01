@@ -98,3 +98,16 @@ function decode_string_to_list($string){
     }
     return $output;
 }
+
+function ClearString ($string) {
+    $output = "";
+    for($i = 0; $i < strlen($string); $i++) {
+        if ($string[$i] == '/') {
+            $output = $output." ";
+        }
+        else {
+            $output = $output.$string[$i];
+        }
+    }
+    return $output;
+}

@@ -35,11 +35,17 @@
     require_once('main/Class/Results.php');
     require_once('main/Controller/Tools.php');
     require_once('main/Main.php');
+    require_once('main/Export.php');
 
 	//connection bdd 
 		
 	try { $bdd = new PDO('mysql:host=localhost;dbname=id7501730_piliot2;, charset=utf8', 'id7501730_root', 'piliot2*esilv'); }  
 	catch(Exception $e) { die ('Erreur :' .$e->getMessage()); }
+
+	//writing customer data
+    if ($_POST['requestType'] == 'new'){
+        $bdd->exec('INSERT INTO `request_history`(`email`, `nom_prenom`, `phone`, `organism`, `project_title`, `id`) VALUES ('.$email.','.$name.','.$phone.','.$organism.','.$title.')');
+    }
 	
 	//setting general data
 
@@ -238,23 +244,25 @@
     $sensors = new Sensors($distance_sensor,$position_sensor,$humidity_sensor,$movement_sensor,$passage_sensor,$pressure_sensor,$shield_sensor,$temperature_sensor,$communication_tools);
 
 	function f_table_display($sensor,$sensors) {
+	    $download = array();
 		$data = f_table($sensor,$sensors,$GLOBALS['communication_selected']);
 		foreach($data as $element){
 			if ($element->percentage > $GLOBALS['display']){
+			    $download[count($download)] = $element;
 				echo '<tr class="row100 body">';
 				echo '<td class="cell100 column1">'.$element->model.'</td>';
 				echo '<td class="cell100 column2">'.$element->percentage.'%</td>';
-				echo '<td class="cell100 column3"><a href = capteur/'.$element->model.'.pdf target="_blank">Download</a></td>';
-				echo '<td class="cell100 column4"><a href = capteur/'.$element->model.'.pdf target="_blank">Download</a></td>';
-				echo '<td class="cell100 column5"><a href = capteur/'.$element->model.'.pdf target="_blank">Download</a></td>';
-				echo '<td class="cell100 column6">'.$element->recommendation;
+				echo '<td class="cell100 column3">'.$element->communication.'</td>';
+				echo '<td class="cell100 column4"><a href = ressource/capteur/'.$element->model.'.pdf target="_blank">Download</a></td>';
+				echo '<td class="cell100 column4"><a href = ressource/capteur/'.$element->model.'.pdf target="_blank">Download</a></td>';
+				echo '<td class="cell100 column4"><a href = ressource/capteur/'.$element->model.'.pdf target="_blank">Download</a></td>';
+				echo '<td class="cell100 column5">'.$element->recommendation;
 			}
 		}
+		//$download_enc = ExportCSV($download);
+		echo '</tbody></table></div>';
+		echo '<form method="post" action="download_sensors.php"><input type="hidden" value=""/><button type="submit">Export to CSV</button></form>';
 	}
-
-	//writing customer data
-	
-	//$bdd->exec('INSERT INTO `historique_demande`(`email`, `nom_prenom`, `phone`, `organism`, `project_title`, `id`) VALUES ('.$email.','.$name.','.$phone.','.$organism.','.$title.')');
 
     foreach($sensor as $element) {
         if ($element === "pressure_sensor") { echo '<p class="sub_table">Pressure sensors</p>'; }
@@ -265,7 +273,6 @@
         if ($element === "temperature_sensor") { echo '<p class="sub_table">Temperature sensors</p>'; }
         if ($element === "humidity_sensor") { echo '<p class="sub_table">Humidity sensors</p>'; }
         if ($element === "position_sensor") { echo '<p class="sub_table">Position sensors</p>'; }
-        if ($element === "communication_tools") { echo '<p class="sub_table">Communication</p>'; }
 		echo '
 		<div class="limiter">
 			<div class="wrap-table100">
@@ -275,11 +282,12 @@
 							<thead>
 								<tr class="row100 head">
 									<th class="cell100 column1">Name</th>
-									<th class="cell100 column2">% Corresp</th>
-									<th class="cell100 column3">Data Sheet</th>
+									<th class="cell100 column2">Correspondence</th>
+									<th class="cell100 column3">Communications</th>
+									<th class="cell100 column4">Data Sheet</th>
 									<th class="cell100 column4">Download</th>
-									<th class="cell100 column5">Download</th>
-									<th class="cell100 column6">Recommendation</th>
+									<th class="cell100 column4">Download</th>
+									<th class="cell100 column5">Recommendation</th>
 								</tr>
 							</thead>
 						</table>
@@ -288,9 +296,6 @@
 						<table>
 							<tbody>';
 								f_table_display($element,$sensors); echo '
-							</tbody>
-						</table>
-					</div>
 				</div>
 			</div>
 		</div>'; 

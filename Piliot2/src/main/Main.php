@@ -152,7 +152,7 @@ function f_request($conditions, $percentage, $sensor){
     if(!$response) { return null; }
     else {
         while ($data = $response->fetch()) {
-            $out[count($out)] = new Results($data['model'],$percentage,array(),$data['recommendation'],$data['communication']);
+            $out[count($out)] = new Results($data['model'],$percentage,array(),$data['recommendation'],ClearString($data['communication']));
         }
     }
     if (count($out) == 0) { $out[0] = new Results("",0,array(),"",""); }

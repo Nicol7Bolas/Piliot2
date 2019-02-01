@@ -141,7 +141,6 @@
                             <input type="checkbox" name="type_passage[]" value="idk" style="display:none"/>
                         </div>
                     <input type="checkbox" name="sensor[]" checked value="idk" style="display:none"/>
-                    <input type="checkbox" name="sensor[]" checked value="moyen_communication" style="display:none"/>
                 </div>
                 <div class="container-contact100-form-btn">
                 <div class="container-contact100-form-btn">

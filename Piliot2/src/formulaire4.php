@@ -35,7 +35,7 @@
                   <input type="hidden" name="activity" value =<?php echo '"'.$_POST['activity'].'"' ?>/>
                   <input type="hidden" name="relation" value =<?php echo '"'.$_POST['relation'].'"' ?>/>
                   <input type="hidden" name="benefits" value =<?php echo '"'.$_POST['benefits'].'"' ?>/>
-                  <input type="hidden" name="activity" value =<?php echo '"'.$_POST['problem'].'"' ?>/>
+                  <input type="hidden" name="problem" value =<?php echo '"'.$_POST['problem'].'"' ?>/>
                   <input type="hidden" name="modifyin" value =<?php echo '"'.$_POST['modifyin'].'"' ?>/>
                   <input type="hidden" name="quantity" value =<?php echo '"'.$_POST['quantity'].'"' ?>/>
                   <input type="hidden" name="sensor" value =<?php echo '"'.$_POST['sensor'].'"' ?>/>
@@ -63,6 +63,7 @@
                   <input type="hidden" name="size_detection_shield" value =<?php echo '"'.$_POST['size_detection_shield'].'"' ?>/>
                   <input type="hidden" name="range_shield" value =<?php echo '"'.$_POST['range_shield'].'"' ?>/>
                   <input type="hidden" name="reaction_delay_passage" value =<?php echo '"'.$_POST['reaction_delay_passage'].'"' ?>/>
+                  <input type="hidden" name="requestType" value ="new"/>
 
 		      <div class="section">Financial aspect</div>
             			<div>
