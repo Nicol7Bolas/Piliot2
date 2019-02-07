@@ -262,3 +262,25 @@ function f_filtering_communication($tab,$communication_selected){
     }
     return $table;
 }
+
+function EncodeCSV ($sensors) {
+    $link1 = $_SERVER['PHP_SELF'];
+    $output = "Model name;Percentage of correspondence;None respected;Percentage of recommendation;Communications available; DataSheet link;".'\n';
+    foreach($sensors as $element) {
+        $link2 = 'ressource/capteur/'.$element->model.'.pdf';
+        $link = $link1.$link2;
+        $output = $output.$element->model.';';
+        $output = $output.$element->percentage.';';
+        $temp = "";
+        foreach($element->error as $error){
+            if ($temp != "") { $temp = $temp.'/'; }
+            $temp = $temp.$error;
+        }
+        $output = $output.$temp.';';
+        $output = $output.$element->recommendation.';';
+        $output = $output.$element->communication.';';
+        $output = $output.$link.';;'.'\n';
+    }
+    return $output;
+}
+?>

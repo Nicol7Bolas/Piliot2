@@ -1,4 +1,4 @@
-	<!DOCTYPE php>
+<!DOCTYPE php>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -9,6 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="format/main_result.css" media="all"/>
 		<link rel="stylesheet" type="text/css" href="format/style_result.css" media="all"/>
 		<script language="javascript" type="text/javascript" src="script/java_script_result.js"></script>
+		<script language="javascript" type="text/javascript" src="script/ExportCSV.js"></script>
 		<script language="javascript" type="text/javascript" src="script/jquery.js"></script>
 		<script language="javascript" type="text/javascript" src="script/main.js"></script>
 		<script language="javascript" type="text/javascript" src="script/jquery-3.2.1.min.js"></script>
@@ -35,7 +36,6 @@
     require_once('main/Class/Results.php');
     require_once('main/Controller/Tools.php');
     require_once('main/Main.php');
-    require_once('main/Export.php');
 
 	//connection bdd 
 		
@@ -43,13 +43,14 @@
 	catch(Exception $e) { die ('Erreur :' .$e->getMessage()); }
 
 	//writing customer data
-    if ($_POST['requestType'] == 'new'){
+    /*if ($_POST['requestType'] == 'new'){
         $bdd->exec('INSERT INTO `request_history`(`email`, `nom_prenom`, `phone`, `organism`, `project_title`, `id`) VALUES ('.$email.','.$name.','.$phone.','.$organism.','.$title.')');
-    }
+    }*/
 	
 	//setting general data
 
     $display = -1;
+    $title = $_POST['title'];
 
     //all sensor
 
@@ -216,14 +217,24 @@
 			}
 		}
 	}
-	if ($_POST['require'][0] != "idk") {
+	$require;
+	if (is_array($_POST['require'])) {
+	    $require = $_POST['require'];
+	}
+	else { $require = decode_string_to_list($_POST['require']); }
+	if ($require[0] != "idk") {
 		foreach($_POST['require'] as $element) {
 			if ($element == "") {
 			    continue;
 			}
 		}
 	}
-	if ($_POST['constraints'][0] != "idk") {
+	$constraints;
+    if (is_array($_POST['constraints'])) {
+        $constraints = $_POST['constraints'];
+    }
+    else { $constraints = decode_string_to_list($_POST['constraints']); }
+	if ($constraints[0] != "idk") {
 		foreach($_POST['constraints'] as $element) {
 			if ($element == "waterproof") {
 				$protection_id[count($protection_id)] = 'IP65';	$protection_id[count($protection_id)] = 'IP66';	$protection_id[count($protection_id)] = 'IP67';	$protection_id[count($protection_id)] = 'IP69';
@@ -257,11 +268,13 @@
 				echo '<td class="cell100 column4"><a href = ressource/capteur/'.$element->model.'.pdf target="_blank">Download</a></td>';
 				echo '<td class="cell100 column4"><a href = ressource/capteur/'.$element->model.'.pdf target="_blank">Download</a></td>';
 				echo '<td class="cell100 column5">'.$element->recommendation;
+				echo '</tr>';
 			}
 		}
-		//$download_enc = ExportCSV($download);
+		$download_enc = "'".EncodeCSV($download)."'";
+		$fileName = "'".$GLOBALS['title'].'_'.$sensor."s'";
 		echo '</tbody></table></div>';
-		echo '<form method="post" action="download_sensors.php"><input type="hidden" value=""/><button type="submit">Export to CSV</button></form>';
+		echo '<button onclick="f_ExportCSV('.$download_enc.','.$fileName.')">Export to CSV</button></form>';
 	}
 
     foreach($sensor as $element) {

@@ -10,7 +10,7 @@ class Results
 
     public function __construct($model, $percentage, $error, $recommendation, $communication){
         $this->model = $model;
-        $this->communication = $communication;
+        $this->communication = $communication   ;
         $this->percentage = $percentage;
         if($recommendation != 0) {$this->recommendation = $recommendation;}
         else {$this->recommendation = "None";}
