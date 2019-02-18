@@ -64,6 +64,8 @@ function f_terms_movement($data)
 {
     $terms = 0;
     if ($data->minimum_temperature != "") { $terms++; }
+    if ($data->minimum_frequency_resistance != "") { $terms++; }
+    if ($data->maximum_frequency_resistance != "") { $terms++; }
     if ($data->maximum_temperature != "") { $terms++; }
     if ($data->minimum_humidity != "") { $terms++; }
     if ($data->maximum_humidity != "") { $terms++; }
@@ -73,6 +75,10 @@ function f_terms_movement($data)
     if ($data->temperature_sensitivity != "") { $terms++; }
     if ($data->sampling_speed != "") { $terms++; }
     if ($data->range != "") { $terms++; }
+    if ($data->weight != "") { $terms++; }
+    if ($data->power_consumption != "") { $terms++; }
+    if (count($data->materials) > 0 ) { $terms++; }
+    if (count($data->protection_id) > 0) { $terms++; }
     return $terms;
 }
 
@@ -235,6 +241,7 @@ function f_table($sensor,$sensors,$communication_selected){
     if ($sensor === "movement_sensor") {
         if (count($combinaison_list) === 0) { $combinaison_list[0] = 0; }
         foreach ($combinaison_list as $combinaison) {
+            echo $combinaison;
             $condition = f_condition_movement($combinaison,$sensors->movement_sensor);
             $temp = f_request($condition->conditions,$condition->percentage,$sensor);
             if ($temp[0] != "") {

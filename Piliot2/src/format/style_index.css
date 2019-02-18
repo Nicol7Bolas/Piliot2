@@ -13,3 +13,35 @@ body
 .link{
 	font-color: white;
 }
+.title_perso {
+	color: white;
+	border-width: 2px;
+	border-color: white;
+	border-style: solid;
+}
+.button_perso {
+	font-size: 14px;
+	margin-top: 5px;
+	margin-left: 6px;
+	padding-left: 3px;
+	padding-top: 1px
+	padding-bottom: 1px;
+	padding-right: 3px;
+	border-radius: 10px;
+	margin-right: 6px;
+	color: white;
+	border-width: 1.3px;
+	border-color: #57b846;
+	border-style: solid;
+	background-color: #57b846;
+}
+.input_perso {
+	padding-left: 2px;
+	padding-right: 2px;
+	padding-bottom: 1px;
+	padding-left: 2px;
+	border-color: black;
+	border-width: 1.3px;
+	border-style: solid;
+	border-radius: 4px;
+}

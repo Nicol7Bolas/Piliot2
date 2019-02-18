@@ -23,3 +23,18 @@ header { margin-left: 100px; }
 .recommend {
     margin-left: 15px;
 }
+.export {
+    margin-top: 5px;
+    margin-bottom:  5px;
+    margin-left: 1050px;
+    color: white;
+    border-width: 1.3px;
+    border-color: #57b846;
+    border-style: solid;
+    background-color: #57b846;
+    border-radius: 10px;
+    display: inline-block;
+    padding-right:  3px;
+    padding-left: 3px;
+    height: auto;
+}

@@ -93,6 +93,40 @@
     $range_passageI = 10;
     $response_time_passageI = 10;
 
+    // distance sensor
+
+    $range_distance = $_POST['range_distance'];
+    $accuracy_distance = $_POST['accuracy_distance'];
+    $sampling_speed_distance = $_POST['sampling_speed_distance'];
+    $max_lighting_distance = $_POST['max_lighting_distance'];
+    $temperature_sensitivity_distance = $_POST['temperature_sensitivity_distance'];
+    $emission_power_distance = $_POST['emission_power_distance'];
+
+    // pressure sensor
+
+    $minimum_pressure = $_POST['minimum_pressure'];
+    $maximum_pressure = $_POST['maximum_pressure'];
+    $repeatability_pressure = $_POST['repeatability_pressure'];
+
+    //temperature sensor
+
+    $minimum_temperature_temperature = $_POST['minimum_temperature'];
+    $maximum_temperature_temperature = $_POST['maximum_temperature'];
+    $repeatability_temperature = $_POST['repeatability_temperature'];
+
+    // humidity sensor
+
+    $minimum_humidity_humidity = $_POST['minimum_humidity'];
+    $maximum_humidity_humidity = $_POST['maximum_humidity'];
+    $repeatability_humidity = $_POST['repeatability_humidity'];
+
+    // human detection sensor
+
+    $max_lighting_shield = $_POST['max_lighting_shield'];
+    $spacing_axes_shield = $_POST['spacing_axes_shield'];
+    $size_detection_shield = $_POST['size_detection_shield'];
+    $range_shield = $_POST['range_shield'];
+
     //setting data
 
     $activity = array();
@@ -136,11 +170,50 @@
 			if($element != "idk") { $sensor[count($sensor)] = $element;}
 		}
 	}
-    if (decode_string_to_list($_POST['environment'])[0] != "idk") {
-		foreach(decode_string_to_list($_POST['environment']) as $element) {
-			if ($element == "") {
-			    continue;
-			}
+	$environment = decode_string_to_list($_POST['environment']);
+    if ($environment[0] != "idk") {
+		foreach($environment as $element) {
+			if ($element == "out") {
+                foreach($environment as $element) {
+                    if($element == "mar" || $element == "sbm") {
+                        if (in_array('IP69',$protection_id) == false) {$protection_id[] = 'IP69';}
+                        if (in_array('IP69K',$protection_id) == false) {$protection_id[] = 'IP69K';}
+                        $minimum_temperature = -1.5;
+                        $maximum_temperature = 35;
+                    }
+                    if($element == "aer") {
+                        foreach($_POST['environment'] as $element) {
+                            if($element = "rct") {
+                                $maximum_temperature = 950;
+                            }
+                            else{
+                                $minimum_temperature = -56;
+                            }
+                        }
+                    }
+                }
+            }
+            if ($element == "ins") {
+                foreach($environment as $element) {
+                    if($element == "aer"){
+                        foreach($environment as $element) {
+                            if($element = "hld"){
+                                $minimum_temperature = 7;
+                                $maximum_temperature = 20;
+                            }
+                            if($element = "cab"){
+                                $minimum_temperature = 15;
+                                $maximum_temperature = 20;
+                            }
+                        }
+                    }
+                }
+            }
+            if ($element == "spa") {
+                $minimum_temperature = -273.15;
+                $maximum_humidity = 0;
+                $minimum_humidity = 0;
+            }
 		}
 	}
 	if ($_POST['use'][0] != "idk") {
@@ -237,7 +310,10 @@
 	if ($constraints[0] != "idk") {
 		foreach($_POST['constraints'] as $element) {
 			if ($element == "waterproof") {
-				$protection_id[count($protection_id)] = 'IP65';	$protection_id[count($protection_id)] = 'IP66';	$protection_id[count($protection_id)] = 'IP67';	$protection_id[count($protection_id)] = 'IP69';
+				if (in_array('IP69',$protection_id) == false) {$protection_id[] = 'IP69';}
+				if (in_array('IP67',$protection_id) == false) {$protection_id[] = 'IP67';}
+				if (in_array('IP66',$protection_id) == false) {$protection_id[] = 'IP66';}
+				if (in_array('IP65',$protection_id) == false) {$protection_id[] = 'IP65';}
 			}
 		}
 	}
@@ -274,7 +350,7 @@
 		$download_enc = "'".EncodeCSV($download)."'";
 		$fileName = "'".$GLOBALS['title'].'_'.$sensor."s'";
 		echo '</tbody></table></div>';
-		echo '<button onclick="f_ExportCSV('.$download_enc.','.$fileName.')">Export to CSV</button></form>';
+		echo '<div class="export"><button onclick="f_ExportCSV('.$download_enc.','.$fileName.')">Export to CSV</button></div>';
 	}
 
     foreach($sensor as $element) {

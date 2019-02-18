@@ -1,3 +1,62 @@
 html {
-    background-image: url(images/bid_data.jpg);
+    background-image: url(images/big_data.jpg);
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+header { margin-left: 150px; }
+.introduction {
+	color: black;
+	font-size: 24px;
+}
+.introduction2 {
+	color: black;
+	font-size: 24px;
+	margin-top: 10px;
+}
+.button_perso {
+	font-size: 15px;
+	height: 28px;
+	width: 110px;
+	margin-left: 6px;
+	padding-left: 3px;
+	padding-right: 3px;
+	border-radius: 10px;
+	margin-right: 6px;
+	color: white;
+	border-width: 1.3px;
+	border-color: #57b846;
+	border-style: solid;
+	background-color: #57b846;
+}
+.link {
+	padding-left: 5px;
+	padding-right: 5px;
+	position: absolute;
+	margin-top: 30px;
+	color: white;
+	background-color: #57b846;
+	border-color: #57b846;
+	border-radius: 10px;
+	border-width: 2px;
+	border-style: solid;
+	text-decoration: none;
+}
+.wrap_perso {
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 50px;
+	padding-right: 50px;
+	margin-top: 30px;
+	border-radius: 20px;
+	margin-left: 300px;
+	background-color: white;
+	height: auto;
+	display: inline-block;
+	margin-bottom: 50px;
+}
+.button2 {
+	margin-left: 300px;
+	font-size: 24px;
 }

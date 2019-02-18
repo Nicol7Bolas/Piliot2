@@ -74,6 +74,15 @@ function f_condition_temperature($cti,$data)
         }
         else { $error[count($error)] = "weight"; }
     }
+    if (count($data->protection_id) > 0) {
+        $terms += $data->protection_idI; $comp++;
+        if ($cti[$comp-1] == 1) {
+            foreach($data->protection_id as $element) {
+                $conditions = $conditions.' AND protection_id LIKE "/'.$element.'/"'; $used += $data->protection_idI;
+            }
+        }
+        else { $error[count($error)] = "weight"; }
+    }
     $out[0] = $conditions;
     if ($terms === 0) { $terms = 1; $used = 1; }
     $out[1] = round ($used / $terms * 100 , 2);

@@ -48,12 +48,9 @@ function f_condition_movement($cti,$data)
     if (count($data->protection_id) > 0) {
         $terms += $data->protection_idI; $comp++;
         if ($cti[$comp-1] == 1) {
-            $conditions = $conditions.' AND (protection_id LIKE "0" ';
             foreach($data->protection_id as $element) {
-                $conditions = $conditions . ' OR protection_id LIKE %'.$element .'%';
+                $conditions = $conditions.' AND protection_id LIKE "/'.$element.'/"'; $used += $data->protection_idI;
             }
-            $used += $data->protection_idI;
-            $conditions = $conditions.' ) ';
         }
         else { $error[count($error)] = "protection_id"; }
     }

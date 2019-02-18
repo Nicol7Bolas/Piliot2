@@ -35,7 +35,7 @@
                   <input type="hidden" name="activity" value =<?php echo '"'.$_POST['activity'].'"' ?>/>
                   <input type="hidden" name="relation" value =<?php echo '"'.$_POST['relation'].'"' ?>/>
                   <input type="hidden" name="benefits" value =<?php echo '"'.$_POST['benefits'].'"' ?>/>
-                  <input type="hidden" name="problem" value =<?php echo '"'.$_POST['problem'].'"' ?>/>
+                  <input type="hidden" name="activity" value =<?php echo '"'.$_POST['problem'].'"' ?>/>
                   <input type="hidden" name="modifyin" value =<?php echo '"'.$_POST['modifyin'].'"' ?>/>
                   <input type="hidden" name="quantity" value =<?php echo '"'.$_POST['quantity'].'"' ?>/>
                   <input type="hidden" name="sensor" value =<?php echo '"'.$_POST['sensor'].'"' ?>/>
@@ -47,8 +47,8 @@
                   <input type="hidden" name="emission_power_distance" value =<?php echo '"'.$_POST['emission_power_distance'].'"' ?>/>
                   <input type="hidden" name="minimum_pressure" value =<?php echo '"'.$_POST['minimum_pressure'].'"' ?>/>
                   <input type="hidden" name="maximum_pressure" value =<?php echo '"'.$_POST['maximum_pressure'].'"' ?>/>
-                  <input type="hidden" name="repetability_temperature" value =<?php echo '"'.$_POST['repetability_temperature'].'"' ?>/>
-                  <input type="hidden" name="repetability_pressure" value =<?php echo '"'.$_POST['repetability_pressure'].'"' ?>/>
+                  <input type="hidden" name="repeatability_temperature" value =<?php echo '"'.$_POST['repeatability_temperature'].'"' ?>/>
+                  <input type="hidden" name="repeatability_pressure" value =<?php echo '"'.$_POST['repeatability_pressure'].'"' ?>/>
                   <input type="hidden" name="minimum_temperature" value =<?php echo '"'.$_POST['minimum_temperature'].'"' ?>/>
                   <input type="hidden" name="maximum_temperature" value =<?php echo '"'.$_POST['maximum_temperature'].'"' ?>/>
                   <input type="hidden" name="environment" value =<?php echo '"'.encode_list_to_string($_POST['environment']).'"'; ?>/>
@@ -63,16 +63,19 @@
                   <input type="hidden" name="size_detection_shield" value =<?php echo '"'.$_POST['size_detection_shield'].'"' ?>/>
                   <input type="hidden" name="range_shield" value =<?php echo '"'.$_POST['range_shield'].'"' ?>/>
                   <input type="hidden" name="reaction_delay_passage" value =<?php echo '"'.$_POST['reaction_delay_passage'].'"' ?>/>
-                  <input type="hidden" name="requestType" value ="new"/>
+                  <input type="hidden" name="minimum_humidity" value = <?php echo '"'.$_POST['minimum_humidity'].'"' ?> />
+                  <input type="hidden" name="maximum_humidity" value = <?php echo '"'.$_POST['maximum_humidity'].'"' ?> />
+                  <input type="hidden" name="repeatability_humidity" value = <?php echo '"'.$_POST['repeatability_humidity'].'"' ?> />
+				  <input type="hidden" name="requestType" value ="new"/>
 
 		      <div class="section">Financial aspect</div>
             			<div>
             				<b>Desired financing method</b><br><br>
             				<select name="financial" class="styled">
-            					<option value="idk">I dont know</option>
-            					<option value="purchase">Purchase</option>
-            					<option value="leasing">Leasing</option>
-            					<option value="subscription">Subscription</option>
+            					<option value="idk">I don't know</option>
+            					<option value="pur">Purchase</option>
+            					<option value="lea">Leasing</option>
+            					<option value="sbs">Subscription</option>
             					<option value="idk">Other</option>
             				</select><br><br>
             			</div>
@@ -81,7 +84,7 @@
             				<b>Budget allocation</b><br><br>
             				For the entire project
             				<select name="allocation1" class="styled">
-            					<option value="idk">I dont know</option>
+            					<option value="idk">I don't know</option>
             					<option value="1">10€</option>
             					<option value="2">30€</option>
             					<option value="3">50€</option>
@@ -95,7 +98,7 @@
 
             				For a pilot(POC)
             				<select name="allocation2" class="styled">
-            					<option value="idk">I dont know</option>
+            					<option value="idk">I don't know</option>
             					<option value="1">10€</option>
             					<option value="2">30€</option>
             					<option value="3">50€</option>
@@ -109,7 +112,7 @@
 
             				By object on the POC
             				<select name="allocation3" class="styled">
-            					<option value="idk">I dont know</option>
+            					<option value="idk">I don't know</option>
             					<option value="1">10€</option>
             					<option value="2">30€</option>
             					<option value="3">50€</option>
@@ -123,7 +126,7 @@
 
             				By object on serialize
             				<select name="allocation4" class="styled">
-            					<option value="idk">I dont know</option>
+            					<option value="idk">I don't know</option>
             					<option value="1">10€</option>
             					<option value="2">30€</option>
             					<option value="3">50€</option>
@@ -150,7 +153,7 @@
             			<div>
             				<b>Project launch</b><br><br>
             				<select name="launch" class="styled">
-            					<option value="idk">I dont know</option>
+            					<option value="idk">I don't know</option>
             					<option value="1">1 to 3 months</option>
             					<option value="2">3 to 6 months</option>
             					<option value="3">6 months to 1 year</option>
@@ -173,21 +176,21 @@
             			<div>
             				<b>Expected return on investment</b><br><br>
             				<select name="ROI" class="styled">
-            					<option value="idk">I dont know</option>
-            					<option value="less">Less than 3 months</option>
-            					<option value="3to6">"3 to 6 months</option>
-            					<option value="6to1">6 months to 1 year</option>
-            					<option value="1to3">1 to 3 years</option>
-            					<option value="more">More than 3 years</option>
+            					<option value="idk">I don't know</option>
+            					<option value="les">Less than 3 months</option>
+            					<option value="3t6">"3 to 6 months</option>
+            					<option value="6t1">6 months to 1 year</option>
+            					<option value="1t3">1 to 3 years</option>
+            					<option value="mo3">More than 3 years</option>
             				</select><br><br>
             			</div>
 
-            			<div class="section">Operationnal Constraints</div>
+            			<div class="section">Operational Constraints</div>
 
             			<div>
             				<b>Remote parameterization of the device</b><br><br>
             				<select name="parameterization" class="styled">
-            					<option value="idk">I dont know</option>
+            					<option value="idk">I don't know</option>
             					<option value="yes">Yes</option>
             					<option value="no">No</option>
             				</select><br><br>
@@ -206,34 +209,34 @@
 
             			<div>
             				<b>Does this require...</b><br><br>
-            				<label class="container"><input type="checkbox" name="require[]" value="pose"/>The pose<span class="checkmark"></span></label>
-            				<label class="container"><input type="checkbox" name="require[]" value="dissam"/>Frequent disassembly<span class="checkmark"></span></label>
-            				<label class="container"><input type="checkbox" name="require[]" value="clean"/>Cleaning/Maintenance<span class="checkmark"></span></label>
+            				<label class="container"><input type="checkbox" name="require[]" value="pos"/>The pose<span class="checkmark"></span></label>
+            				<label class="container"><input type="checkbox" name="require[]" value="dis"/>Frequent disassembly<span class="checkmark"></span></label>
+            				<label class="container"><input type="checkbox" name="require[]" value="cln"/>Cleaning/Maintenance<span class="checkmark"></span></label>
             				<label class="container"><input type="checkbox" name="require[]" value="batt"/>Recharging battery<span class="checkmark"></span></label>
             				<input type="checkbox" name="require[]" checked value="idk" style="display:none"/>
             			</div>
 
             			<div>
             				<b>Environmental constraints</b><br><br>
-            				<label class="container"><input type="checkbox" name="constraints[]" value="storage"/>Storage temperature<span class="checkmark"></span></label>
-            				<label class="container"><input type="checkbox" name="constraints[]" value="operating"/>Operating temperature<span class="checkmark"></span></label>
-            				<label class="container"><input type="checkbox" name="constraints[]" value="waterproof"/>Waterproof(IP 65, IP66, IP67 ...)<span class="checkmark"></span></label>
-            				<label class="container"><input type="checkbox" name="constraints[]" value="projection"/>Projection of oil, acid ...<span class="checkmark"></span></label>
-            				<label class="container"><input type="checkbox" name="constraints[]" value="vibration"/>Vibrations<span class="checkmark"></span></label>
-            				<label class="container"><input type="checkbox" name="constraints[]" value="environment"/>Particular environment(ATEX, cold room, oven ...)<span class="checkmark"></span></label>
+            				<label class="container"><input type="checkbox" name="constraints[]" value="str"/>Storage temperature<span class="checkmark"></span></label>
+            				<label class="container"><input type="checkbox" name="constraints[]" value="ope"/>Operating temperature<span class="checkmark"></span></label>
+            				<label class="container"><input type="checkbox" name="constraints[]" value="wtr"/>Waterproof(IP 65, IP66, IP67 ...)<span class="checkmark"></span></label>
+            				<label class="container"><input type="checkbox" name="constraints[]" value="prj"/>Projection of oil, acid ...<span class="checkmark"></span></label>
+            				<label class="container"><input type="checkbox" name="constraints[]" value="vib"/>Vibrations<span class="checkmark"></span></label>
+            				<label class="container"><input type="checkbox" name="constraints[]" value="ent"/>Particular environment(ATEX, cold room, oven ...)<span class="checkmark"></span></label>
             				<input type="checkbox" name="constraints[]" checked value="idk" style="display:none"/>
             			</div>
 
             			<div>
             				<b>Should we interface with an existing platform?</b><br><br>
             				<select name="interface" class="styled">
-            					<option value="idk">I dont know</option>
+            					<option value="idk">I don't know</option>
             					<option value="no">No</option>
             					<option value="ibm">IBM Bluemix</option>
             					<option value="AWS">Amazon Web Services(AWS)</option>
             					<option value="SAP">SAP Hana Cloud Platform</option>
-            					<option value="MQTT">Other platform in MQTT</option>
-            					<option value="HTTP">Other platform in HTTP</option>
+            					<option value="MQT">Other platform in MQTT</option>
+            					<option value="HTP">Other platform in HTTP</option>
             					<option value="idc">Other</option>
             				</select><br><br>
             			</div>

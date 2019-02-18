@@ -1,41 +1,47 @@
-<?php
-require_once ('main/DAO/DAO_recommendation.php');
-require_once ('main/Main.php');
-$email = $_POST['email'];
-try { $bdd = new PDO('mysql:host=localhost;dbname=id7501730_piliot2;, charset=utf8', 'id7501730_root', 'piliot2*esilv'); }
-catch(Exception $e) { /*die ('Erreur :' .$e->getMessage());*/ }
-$recommendations = "";
-$query = f_checking_recommendation($email);
-if ($query > 0) {
-	header("Location : recommend_identification?error=true");
-}
-else{
-$recommendations = f_getting_recommendation($email);
-/*$response = $bdd->query($query);
-$data = $reponse[0]['c'];*/
-
-}
-?>
+<!DOCTYPE php>
 <html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Recommendation</title>
+		<link rel="stylesheet" type="text/css" href="format/style_recommendation.css" media="all"/>
+	</head>
 <body>
-	<form method="post" action="recommend_traitement.php">
-		Choose the class of the sensor you recommend or not<br><br>
-				<select name="class" class="styled">
-					<option value="1">Temperature sensor</option>
-					<option value="2">Humidity sensor</option>
-					<option value="3">Pressure sensor</option>
-					<option value="4">Shiel sensor</option>
-					<option value="5">Movement sensor</option>
-				</select><br><br>
-		Type the name on the sensor you want to recommend or not <br><br><input type="text" name="sensor" value=""/><br><br>
-		Do you recommend it ?<br><br>
-				<select name="recommendation" class="styled">
-					<option value="yes">I recommend</option>
-					<option value="no">I don't recommend</option>
-				</select><br><br>
-		<input type="text" value="<?php $email ?>" style="display:none"/>
-		<button type="submit"/>
-	</form>
+	<header>
+    	<br><br><img src="format/images/hear&know_logo.png" style='position: relative;'/>
+    </header><br><br>
+<?php
+	require_once ('main/DAO/DAO_recommendation.php');
+	require_once ('main/Main.php');
+	$email = $_POST['email'];
+	echo '<div class="wrap_perso"><div class="introduction">You are connected with the email : '.$email.'<br></div></div>';
+	try { $bdd = new PDO('mysql:host=localhost;dbname=id7501730_piliot2;, charset=utf8', 'id7501730_root', 'piliot2*esilv'); }
+	catch(Exception $e) { die ('Erreur :' .$e->getMessage()); }
+	$recommendations = "";
+	$data = false;
+	$query = 'SELECT id FROM request_history WHERE email = "'.$email.'"';
+	$response = $bdd->query($query);
+    if ($data = $response->fetch()) {
+        $data = true;
+    }
+    if ($data == true) { DisplayForm($email); }
+    else { DisplayError($email); }
+    function DisplayForm ($email) {
+    	echo '<div class="wrap_form">
+		<form method="post" action="recommend_traitement.php">
+			Type the name on the sensor you want to rate : <input type="text" name="sensor"/><br><br>
+			Do you recommend it ?
+					<select name="recommendation" class="styled">
+						<option value="yes">I recommend</option>
+						<option value="no">I dont recommend</option>
+					</select><br><br>
+			<input type="text" value="<?php $email ?>" style="display:none"/>
+			<button class="button_perso" type="submit">Share my opinion</button>
+		</form></div>';
+	}
+	function DisplayError($email) {
+		echo 'You cant rate a sensor because no research have been done with the email '.$email;
+	}
+	?>
 </body>
 </html>
 
