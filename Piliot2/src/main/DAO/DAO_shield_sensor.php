@@ -3,13 +3,13 @@ require_once('Request_data.php');
 function f_condition_shield($cti,$data)
 {
     $conditions = ""; $used = 0; $terms = 0; $comp = 0;
-    $out = array();
+    $out = array(); $error = array();
     if ($data->minimum_temperature != "") {
         $terms += $data->temperatureI; $comp++;
         if ($cti[$comp-1] == 1) {
             $conditions = $conditions.' AND minimum_temperature <= '.$data->minimum_temperature.''; $used += $data->temperatureI;
         }
-        else { $error[count($error)] = "minimum_temperature"; }
+        else { $error[] = "minimum_temperature"; }
     }
     if ($data->maximum_temperature != "") {
         $terms += $data->temperatureI; $comp++;

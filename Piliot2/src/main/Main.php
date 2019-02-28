@@ -16,7 +16,7 @@ function f_generate_combinaison($sensor,$sensors)
     $texts = array(); $out = array();
     if ($sensor === "pressure_sensor") { $texts = f_text_combinaison(f_terms_pressure($sensors->pressure_sensor)); }
     if ($sensor === "distance_sensor") { $texts = f_text_combinaison(f_terms_distance($sensors->distance_sensor)); }
-    if ($sensor === "movement_sensor") { $texts = f_text_combinaison(f_terms_distance($sensors->movement_sensor)); }
+    if ($sensor === "movement_sensor") { $texts = f_text_combinaison(f_terms_movement($sensors->movement_sensor)); }
     if ($sensor === "moyen_communication") { $texts = f_text_combinaison(f_terms_communication($sensors->communication_tools)); }
     if ($sensor === "shield_sensor")
         $texts = f_text_combinaison(f_terms_shield($sensors->shield_sensor));
@@ -41,6 +41,7 @@ function f_terms_pressure($data)
     if ($data->minimum_humidity != "") { $terms++; }
     if ($data->maximum_humidity != "") { $terms++; }
     if ($data->weight != "") { $terms++; }
+    if (count($data->protection_id) > 0) { $terms++; }
     return $terms;
 }
 
@@ -57,6 +58,7 @@ function f_terms_distance($data)
     if ($data->temperature_sensitivity != "") { $terms++; }
     if ($data->sampling_speed != "") { $terms++; }
     if ($data->range != "") { $terms++; }
+    if (count($data->protection_id) > 0) { $terms++; }
     return $terms;
 }
 
@@ -112,6 +114,7 @@ function f_terms_passage($data){
     if ($data->maximum_humidity != "") { $terms++; }
     if ($data->maximum_range != "") { $terms++; }
     if ($data->reaction_delay != "") { $terms++; }
+    if (count($data->protection_id) > 0) { $terms++; }
     return $terms;
 }
 
@@ -241,7 +244,6 @@ function f_table($sensor,$sensors,$communication_selected){
     if ($sensor === "movement_sensor") {
         if (count($combinaison_list) === 0) { $combinaison_list[0] = 0; }
         foreach ($combinaison_list as $combinaison) {
-            echo $combinaison;
             $condition = f_condition_movement($combinaison,$sensors->movement_sensor);
             $temp = f_request($condition->conditions,$condition->percentage,$sensor);
             if ($temp[0] != "") {
@@ -289,5 +291,34 @@ function EncodeCSV ($sensors) {
         $output = $output.$link.';;'.'\n';
     }
     return $output;
+}
+
+function f_getting_com_country($countryList){
+    $com_list = array()
+    $query = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'communication_per_country'";
+    $response = $GLOBALS['bdd']->query(query);
+    if(!$response) { return null; }
+    else {
+        while ($data = $response->fetch()) {
+            $com_list[] = $data;
+        }
+    }
+    $com_list = array_slice($com_list,1,count(com_list)-2);
+    foreach($countryList as $country) {
+        $temp = array();
+        $query = "SELECT * FROM communication_per_country WHERE country = '".$country."'";
+        $response = $GLOBALS['bdd']->query(query);
+        if(!$response) { return null; }
+        else {
+            while ($data = $response->fetch()) {
+                $temp[] = $data;
+            }
+        }
+        foreach($temp as $com) {
+            if($com == 0) {
+                $com_list = array_diff($com_list,[$com]);
+            }
+        }
+    }
 }
 ?>

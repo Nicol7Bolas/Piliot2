@@ -36,11 +36,18 @@
     require_once('main/Class/Results.php');
     require_once('main/Controller/Tools.php');
     require_once('main/Main.php');
+    require_once('main/Controller/Similar.php');
 
 	//connection bdd 
 		
 	try { $bdd = new PDO('mysql:host=localhost;dbname=id7501730_piliot2;, charset=utf8', 'id7501730_root', 'piliot2*esilv'); }  
 	catch(Exception $e) { die ('Erreur :' .$e->getMessage()); }
+
+    $email = $_POST['email'];
+    $nom = $_POST['nom'];
+    $phone = $_POSY['phone'];
+    $organism = $_POST['organism'];
+    $project_title = $_POST['project_title'];
 
 	//writing customer data
     /*if ($_POST['requestType'] == 'new'){
@@ -175,9 +182,13 @@
 		foreach($environment as $element) {
 			if ($element == "out") {
                 foreach($environment as $element) {
-                    if($element == "mar" || $element == "sbm") {
+                    if($element == "sbm") {
                         if (in_array('IP69',$protection_id) == false) {$protection_id[] = 'IP69';}
-                        if (in_array('IP69K',$protection_id) == false) {$protection_id[] = 'IP69K';}
+                        $minimum_temperature = -1.5;
+                        $maximum_temperature = 35;
+                    }
+                    if($element == "mar") {
+                        if (in_array('IP65',$protection_id) == false) {$protection_id[] = 'IP65';}
                         $minimum_temperature = -1.5;
                         $maximum_temperature = 35;
                     }
@@ -310,13 +321,12 @@
 	if ($constraints[0] != "idk") {
 		foreach($_POST['constraints'] as $element) {
 			if ($element == "waterproof") {
-				if (in_array('IP69',$protection_id) == false) {$protection_id[] = 'IP69';}
-				if (in_array('IP67',$protection_id) == false) {$protection_id[] = 'IP67';}
-				if (in_array('IP66',$protection_id) == false) {$protection_id[] = 'IP66';}
 				if (in_array('IP65',$protection_id) == false) {$protection_id[] = 'IP65';}
 			}
 		}
 	}
+
+    $communication_available = f_getting_com_country(decode_string_to_list($environment));
 
 	//DISPLAY WORKING
 	$communication_tools = new Communication_tools();
@@ -364,6 +374,9 @@
         if ($element === "position_sensor") { echo '<p class="sub_table">Position sensors</p>'; }
 		echo '
 		<div class="limiter">
+		    <div class="similar">
+		        //f_similar($email,$name,$phone,$organism,$project_title);
+		    </div>
 			<div class="wrap-table100">
 				<div class="table100 ver1 m-b-110">
 					<div class="table100-head">

@@ -67,6 +67,18 @@ function f_condition_passage($cti,$data)
 		}
 		else { $error[count($error)] = "type"; }
     }
+    if (count($data->protection_id) > 0) {
+        $terms += $data->protection_idI; $comp++;
+        if ($cti[$comp-1] == 1) {
+            $conditions = $conditions.' AND (protection_id LIKE "0" ';
+            foreach($data->protection_id as $element) {
+                $conditions = $conditions . ' OR protection_id LIKE %'.$element .'%';
+            }
+            $used += $data->protection_idI;
+            $conditions = $conditions.' ) ';
+        }
+        else { $error[count($error)] = "protection_id"; }
+    }
     $out[0] = $conditions;
     if ($terms === 0) { $terms = 1; $used = 1; }
     $out[1] = round ($used / $terms * 100 , 2);

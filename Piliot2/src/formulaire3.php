@@ -102,7 +102,7 @@
                             <div class="inside" id='maritime_inside' style="display:none">
                                 <label class="container"><input type="checkbox" name="environment[]" value="hea"/>Proximity to a heating source ?<span class="checkmark"></span></label>
                             </div>
-                            <div class="outside" id='maritime_inside' style='display:none'>
+                            <div class="outside" id='maritime_outside' style='display:none'>
                                 <label class="container"><input type="checkbox" name="environment[]" value="Imm"/>Immersed ?<span class="checkmark"></span></label>
                             </div>
                             <label class="container"><input type="checkbox" name="environment[]" value="ari"/>Proximity to engines ?<span class="checkmark"></span></label>
@@ -119,15 +119,198 @@
     				<input type="checkbox" name="environment[]" checked value="idk" style="display:none"/>
     			</div>
 
-    			<div class="wrap-input200">
+    			<div>
     				<b>What is the area of use of the sensor ?</b><br><br>
-    				<label class="container"><input type="checkbox" name="use[]" id="use1" value="loc"/>Local (constructions,cities...)<span class="checkmark"></span></label>
-    				<label class="container"><input type="checkbox" name="use[]" id="use2" value="fr"/>France<span class="checkmark"></span></label>
-    				<label class="container"><input type="checkbox" name="use[]" id="use3" value="eu"/>Europe<span class="checkmark"></span></label>
-    				<label class="container"><input type="checkbox" onclick="display('use',4)" id="use4"/>Other continent<span class="checkmark"></span></label>
-    				<input class="input100" type="text" name="use[]" id="use" value="" placeholder="Enter an other continent" style="display:none"/>
-    				<label class="container"><input type="checkbox" name="use[]" id="use5" value="wwd"/>Worldwide<span class="checkmark"></span></label>
-    				<input type="checkbox" name="use[]" id="use6" checked value="idk" style="display:none"/>
+                    <label class="container"><input type="checkbox" id="country" onclick='display("country","","","country_list")'/>Click here to display the countries' list<span class="checkmark"></span></label>
+                    <div id="country_list" style="display:none">
+                        <label><input type="checkbox" name="environment[]" value="afg"/>Afghanistan</label><br>
+                        <label><input type="checkbox" name="environment[]" value="alb"/>Albania</label><br>
+                        <label><input type="checkbox" name="environment[]" value="alg"/>Algeria</label><br>
+                        <label><input type="checkbox" name="environment[]" value="and"/>Andorra</label><br>
+                        <label><input type="checkbox" name="environment[]" value="anu"/>Anguilla</label><br>
+                        <label><input type="checkbox" name="environment[]" value="ano"/>Angola</label><br>
+                        <label><input type="checkbox" name="environment[]" value="arg"/>Argentina</label><br>
+                        <label><input type="checkbox" name="environment[]" value="aru"/>Aruba</label><br>
+                        <label><input type="checkbox" name="environment[]" value="arm"/>Armenia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="aus"/>Australia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="aut"/>Austria</label><br>
+                        <label><input type="checkbox" name="environment[]" value="aze"/>Azerbaijan</label><br>
+                        <label><input type="checkbox" name="environment[]" value="bah"/>Bahamas</label><br>
+                        <label><input type="checkbox" name="environment[]" value="ban"/>Banhrain</label><br>
+                        <label><input type="checkbox" name="environment[]" value="bag"/>Bangladesh</label><br>
+                        <label><input type="checkbox" name="environment[]" value="bar"/>Barbados</label><br>
+                        <label><input type="checkbox" name="environment[]" value="bel"/>Belarus</label><br>
+                        <label><input type="checkbox" name="environment[]" value="beg"/>Belgium</label><br>
+                        <label><input type="checkbox" name="environment[]" value="bei"/>Belize</label><br>
+                        <label><input type="checkbox" name="environment[]" value="ben"/>Benin</label><br>
+                        <label><input type="checkbox" name="environment[]" value="bhu"/>Bhutan</label><br>
+                        <label><input type="checkbox" name="environment[]" value="bol"/>Bolivia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="bos"/>Bosnia and Herzegovina</label><br>
+                        <label><input type="checkbox" name="environment[]" value="bot"/>Botswana</label><br>
+                        <label><input type="checkbox" name="environment[]" value="bra"/>Brazil</label><br>
+                        <label><input type="checkbox" name="environment[]" value="bru"/>Brunei</label><br>
+                        <label><input type="checkbox" name="environment[]" value="bul"/>Bulgaria</label><br>
+                        <label><input type="checkbox" name="environment[]" value="bur"/>Burkina Fasso </label><br>
+                        <label><input type="checkbox" name="environment[]" value="cab"/>Cabo Verde</label><br>
+                        <label><input type="checkbox" name="environment[]" value="cam"/>Cambodia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="cae"/>Cameroon</label><br>
+                        <label><input type="checkbox" name="environment[]" value="can"/>Canada</label><br>
+                        <label><input type="checkbox" name="environment[]" value="car"/>Central African Republic</label><br>
+                        <label><input type="checkbox" name="environment[]" value="cha"/>Chad</label><br>
+                        <label><input type="checkbox" name="environment[]" value="chl"/>Chile</label><br>
+                        <label><input type="checkbox" name="environment[]" value="chi"/>China</label><br>
+                        <label><input type="checkbox" name="environment[]" value="col"/>Colombia </label><br>
+                        <label><input type="checkbox" name="environment[]" value="com"/>Comoros </label><br>
+                        <label><input type="checkbox" name="environment[]" value="con"/>Congo</label><br>
+                        <label><input type="checkbox" name="environment[]" value="cor"/>Costa Rica </label><br>
+                        <label><input type="checkbox" name="environment[]" value="cro"/>Croatia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="cub"/>Cuba</label><br>
+                        <label><input type="checkbox" name="environment[]" value="cug"/>Cuba (Guantanamo) </label><br>
+                        <label><input type="checkbox" name="environment[]" value="cyp"/>Cyprus </label><br>
+                        <label><input type="checkbox" name="environment[]" value="czr"/>Czech Republic </label><br>
+                        <label><input type="checkbox" name="environment[]" value="den"/>Denmark</label><br>
+                        <label><input type="checkbox" name="environment[]" value="dji"/>Djibouti</label><br>
+                        <label><input type="checkbox" name="environment[]" value="dom"/>Dominica</label><br>
+                        <label><input type="checkbox" name="environment[]" value="dor"/>Dominican Republic</label><br>
+                        <label><input type="checkbox" name="environment[]" value="ecu"/>Ecuator</label><br>
+                        <label><input type="checkbox" name="environment[]" value="egy"/>Egypt</label><br>
+                        <label><input type="checkbox" name="environment[]" value="els"/>El Salvador</label><br>
+                        <label><input type="checkbox" name="environment[]" value="eqg"/>Equatorial Guinea</label><br>
+                        <label><input type="checkbox" name="environment[]" value="est"/>Estonia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="esw"/>Eswatini</label><br>
+                        <label><input type="checkbox" name="environment[]" value="eth"/>Ethiopia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="fij"/>Fiji</label><br>
+                        <label><input type="checkbox" name="environment[]" value="fin"/>Finland</label><br>
+                        <label><input type="checkbox" name="environment[]" value="fra"/>France</label><br>
+                        <label><input type="checkbox" name="environment[]" value="gab"/>Gabon</label><br>
+                        <label><input type="checkbox" name="environment[]" value="gam"/>Gambia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="geo"/>Georgia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="ger"/>Germany</label><br>
+                        <label><input type="checkbox" name="environment[]" value="gha"/>Ghana</label><br>
+                        <label><input type="checkbox" name="environment[]" value="gre"/>Greece</label><br>
+                        <label><input type="checkbox" name="environment[]" value="gua"/>Guatemala</label><br>
+                        <label><input type="checkbox" name="environment[]" value="gui"/>Guinea</label><br>
+                        <label><input type="checkbox" name="environment[]" value="gbi"/>Guinea-Bissau</label><br>
+                        <label><input type="checkbox" name="environment[]" value="guy"/>Guyana</label><br>
+                        <label><input type="checkbox" name="environment[]" value="hai"/>Haiti</label><br>
+                        <label><input type="checkbox" name="environment[]" value="hon"/>Honduras</label><br>
+                        <label><input type="checkbox" name="environment[]" value="hok"/>Hong Kong (SAR)</label><br>
+                        <label><input type="checkbox" name="environment[]" value="hun"/>Hungary</label><br>
+                        <label><input type="checkbox" name="environment[]" value="ice"/>Iceland</label><br>
+                        <label><input type="checkbox" name="environment[]" value="ind"/>India</label><br>
+                        <label><input type="checkbox" name="environment[]" value="ino"/>Indonesia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="ira"/>Iran</label><br>
+                        <label><input type="checkbox" name="environment[]" value="irq"/>Iraq</label><br>
+                        <label><input type="checkbox" name="environment[]" value="ire"/>Ireland</label><br>
+                        <label><input type="checkbox" name="environment[]" value="isr"/>Israel</label><br>
+                        <label><input type="checkbox" name="environment[]" value="ita"/>Italy</label><br>
+                        <label><input type="checkbox" name="environment[]" value="ivc"/>Ivory Coast</label><br>
+                        <label><input type="checkbox" name="environment[]" value="jam"/>Jamaica</label><br>
+                        <label><input type="checkbox" name="environment[]" value="jap"/>Japan</label><br>
+                        <label><input type="checkbox" name="environment[]" value="jor"/>Jordan</label><br>
+                        <label><input type="checkbox" name="environment[]" value="kaz"/>Kazakhstan</label><br>
+                        <label><input type="checkbox" name="environment[]" value="lao"/>Laos</label><br>
+                        <label><input type="checkbox" name="environment[]" value="lat"/>Latvia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="leb"/>Lebanon</label><br>
+                        <label><input type="checkbox" name="environment[]" value="les"/>Lesotho</label><br>
+                        <label><input type="checkbox" name="environment[]" value="lib"/>Liberia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="liy"/>Libya</label><br>
+                        <label><input type="checkbox" name="environment[]" value="lie"/>Liechtenstein</label><br>
+                        <label><input type="checkbox" name="environment[]" value="lit"/>Lithuania</label><br>
+                        <label><input type="checkbox" name="environment[]" value="lux"/>Luxembourg</label><br>
+                        <label><input type="checkbox" name="environment[]" value="mac"/>Macedonia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="mad"/>Madagascar </label><br>
+                        <label><input type="checkbox" name="environment[]" value="mal"/>Malawi</label><br>
+                        <label><input type="checkbox" name="environment[]" value="maa"/>Malaysia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="mad"/>Maldives</label><br>
+                        <label><input type="checkbox" name="environment[]" value="mai"/>Mali</label><br>
+                        <label><input type="checkbox" name="environment[]" value="mat"/>Malta</label><br>
+                        <label><input type="checkbox" name="environment[]" value="mau"/>Mauritania</label><br>
+                        <label><input type="checkbox" name="environment[]" value="mur"/>Mauritius</label><br>
+                        <label><input type="checkbox" name="environment[]" value="mex"/>Mexico</label><br>
+                        <label><input type="checkbox" name="environment[]" value="mic"/>Micronesia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="mol"/>Moldova</label><br>
+                        <label><input type="checkbox" name="environment[]" value="mon"/>Monaco</label><br>
+                        <label><input type="checkbox" name="environment[]" value="mog"/>Mongolia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="mot"/>Montenegro</label><br>
+                        <label><input type="checkbox" name="environment[]" value="mor"/>Morocco</label><br>
+                        <label><input type="checkbox" name="environment[]" value="moz"/>Mozambique</label><br>
+                        <label><input type="checkbox" name="environment[]" value="mya"/>Myanmar</label><br>
+                        <label><input type="checkbox" name="environment[]" value="nam"/>Namibia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="nau"/>Nauru</label><br>
+                        <label><input type="checkbox" name="environment[]" value="nep"/>Nepal</label><br>
+                        <label><input type="checkbox" name="environment[]" value="net"/>Netherland</label><br>
+                        <label><input type="checkbox" name="environment[]" value="nez"/>New Zealand</label><br>
+                        <label><input type="checkbox" name="environment[]" value="nic"/>Nicaragua</label><br>
+                        <label><input type="checkbox" name="environment[]" value="nig"/>Nigeria</label><br>
+                        <label><input type="checkbox" name="environment[]" value="nok"/>North Korea</label><br>
+                        <label><input type="checkbox" name="environment[]" value="now"/>Norway</label><br>
+                        <label><input type="checkbox" name="environment[]" value="oma"/>Oman</label><br>
+                        <label><input type="checkbox" name="environment[]" value="pak"/>Pakistan</label><br>
+                        <label><input type="checkbox" name="environment[]" value="pal"/>Palestine</label><br>
+                        <label><input type="checkbox" name="environment[]" value="pan"/>Panama</label><br>
+                        <label><input type="checkbox" name="environment[]" value="png"/>Papua New Guinea</label><br>
+                        <label><input type="checkbox" name="environment[]" value="par"/>Paraguay</label><br>
+                        <label><input type="checkbox" name="environment[]" value="per"/>Peru</label><br>
+                        <label><input type="checkbox" name="environment[]" value="phi"/>Philippines</label><br>
+                        <label><input type="checkbox" name="environment[]" value="pol"/>Poland</label><br>
+                        <label><input type="checkbox" name="environment[]" value="por"/>Portugal</label><br>
+                        <label><input type="checkbox" name="environment[]" value="pur"/>Puerto Rico</label><br>
+                        <label><input type="checkbox" name="environment[]" value="qua"/>Qatar</label><br>
+                        <label><input type="checkbox" name="environment[]" value="rui"/>Reunion Island</label><br>
+                        <label><input type="checkbox" name="environment[]" value="rom"/>Romania</label><br>
+                        <label><input type="checkbox" name="environment[]" value="rus"/>Russia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="rwa"/>Rwanda</label><br>
+                        <label><input type="checkbox" name="environment[]" value="skn"/>Saint Kitts and Nevis</label><br>
+                        <label><input type="checkbox" name="environment[]" value="svg"/>Saint Vincent and the Grenadines</label><br>
+                        <label><input type="checkbox" name="environment[]" value="sam"/>Samoa</label><br>
+                        <label><input type="checkbox" name="environment[]" value="sma"/>San Marino</label><br>
+                        <label><input type="checkbox" name="environment[]" value="stp"/>Sao Tome and Principe</label><br>
+                        <label><input type="checkbox" name="environment[]" value="saa"/>Saudi Arabia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="sen"/>Senegal</label><br>
+                        <label><input type="checkbox" name="environment[]" value="ser"/>Serbia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="sey"/>Seychelles</label><br>
+                        <label><input type="checkbox" name="environment[]" value="sie"/>Sierra</label><br>
+                        <label><input type="checkbox" name="environment[]" value="sin"/>Singapore</label><br>
+                        <label><input type="checkbox" name="environment[]" value="slo"/>Slovakia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="slv"/>Slovenia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="sol"/>Solomon Islands</label><br>
+                        <label><input type="checkbox" name="environment[]" value="som"/>Somalia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="sar"/>South Africa</label><br>
+                        <label><input type="checkbox" name="environment[]" value="sok"/>South Korea</label><br>
+                        <label><input type="checkbox" name="environment[]" value="sos"/>South Sudan</label><br>
+                        <label><input type="checkbox" name="environment[]" value="spa"/>Spain</label><br>
+                        <label><input type="checkbox" name="environment[]" value="sil"/>Sri Lanka</label><br>
+                        <label><input type="checkbox" name="environment[]" value="sud"/>Sudan</label><br>
+                        <label><input type="checkbox" name="environment[]" value="sur"/>Suriname</label><br>
+                        <label><input type="checkbox" name="environment[]" value="swe"/>Sweden</label><br>
+                        <label><input type="checkbox" name="environment[]" value="swi"/>Switzerland</label><br>
+                        <label><input type="checkbox" name="environment[]" value="syr"/>Syria</label><br>
+                        <label><input type="checkbox" name="environment[]" value="tai"/>Taiwan</label><br>
+                        <label><input type="checkbox" name="environment[]" value="taj"/>Tajikistan</label><br>
+                        <label><input type="checkbox" name="environment[]" value="tha"/>Thailand</label><br>
+                        <label><input type="checkbox" name="environment[]" value="tim"/>Timor-Leste</label><br>
+                        <label><input type="checkbox" name="environment[]" value="tog"/>Togo</label><br>
+                        <label><input type="checkbox" name="environment[]" value="ton"/>Tonga</label><br>
+                        <label><input type="checkbox" name="environment[]" value="tri"/>Trinidad and Tobago</label><br>
+                        <label><input type="checkbox" name="environment[]" value="tun"/>Tunisia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="tur"/>Turkey</label><br>
+                        <label><input type="checkbox" name="environment[]" value="tum"/>Turkmenistan</label><br>
+                        <label><input type="checkbox" name="environment[]" value="uga"/>Uganda</label><br>
+                        <label><input type="checkbox" name="environment[]" value="ukr"/>Ukraine</label><br>
+                        <label><input type="checkbox" name="environment[]" value="uae"/>UAE</label><br>
+                        <label><input type="checkbox" name="environment[]" value="unk"/>United Kingdom</label><br>
+                        <label><input type="checkbox" name="environment[]" value="usa"/>USA</label><br>
+                        <label><input type="checkbox" name="environment[]" value="urg"/>Uruguay</label><br>
+                        <label><input type="checkbox" name="environment[]" value="uzb"/>Uzbekistan</label><br>
+                        <label><input type="checkbox" name="environment[]" value="van"/>Vanuatu</label><br>
+                        <label><input type="checkbox" name="environment[]" value="ven"/>Venezuela</label><br>
+                        <label><input type="checkbox" name="environment[]" value="vie"/>Vietnam</label><br>
+                        <label><input type="checkbox" name="environment[]" value="yem"/>Yemen</label><br>
+                        <label><input type="checkbox" name="environment[]" value="zam"/>Zambia</label><br>
+                        <label><input type="checkbox" name="environment[]" value="zim"/>Zimbabwe</label><br>
+                        <label><input type="checkbox" name="environment[]" checked value="idk" style="display:none"/>Zimbabwe</label><br>
+                    </div>
     			</div>
 
     			<div>
@@ -242,8 +425,8 @@
     			<div>
     				<label for="phase"><b>If you need a pilot phase, how long do you want?</b></label><br><br>
     				<select id="phase" name="phase" class="styled">
-    					<option value="idn">I dont need i pilot phase</option>
-    					<option value="idk">I dont know</option>
+    					<option value="idn">I don't need i pilot phase</option>
+    					<option value="idk">I don't know</option>
     					<option value="1">Days</option>
     					<option value="2">Weeks</option>
     					<option value="3">Months</option>
