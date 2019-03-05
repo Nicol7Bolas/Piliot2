@@ -40,19 +40,28 @@
 
 	//connection bdd 
 		
-	try { $bdd = new PDO('mysql:host=localhost;dbname=id7501730_piliot2;, charset=utf8', 'id7501730_root', 'piliot2*esilv'); }  
+	try { $bdd = new PDO('mysql:host=localhost;dbname=id7501730_piliot2;, charset=utf8', 'root', ''); }
 	catch(Exception $e) { die ('Erreur :' .$e->getMessage()); }
 
     $email = $_POST['email'];
-    $nom = $_POST['nom'];
-    $phone = $_POSY['phone'];
+    $nom = $_POST['name'];
+    $phone = $_POST['phone'];
     $organism = $_POST['organism'];
-    $project_title = $_POST['project_title'];
+    $project_title = $_POST['title'];
 
 	//writing customer data
-    /*if ($_POST['requestType'] == 'new'){
-        $bdd->exec('INSERT INTO `request_history`(`email`, `nom_prenom`, `phone`, `organism`, `project_title`, `id`) VALUES ('.$email.','.$name.','.$phone.','.$organism.','.$title.')');
-    }*/
+    if ($_POST['requestType'] == 'new'){
+        $query = "INSERT INTO `request_history`(`email`, `name`, `phone`, `organism`, `title`, `activity`, `relation`, `benefits`, `modifyin`, `quantity`, `sensor`, `range_distance`, `accuracy_distance`, `sampling_speed_distance`, `max_lighting_distance`, `temperature_sensitivity_distance`, `emission_power_distance`, `minimum_pressure`, `maximum_pressure`, `repeatability_temperature`, `repeatability_pressure`, `minimum_temperature`, `maximum_temperature`, `environment`, `range_passage`, `response_time_passage`, `use`, `connection`, `frequency`, `temperature_sensitivity_movement`, `max_lighting_shield`, `spacing_axes_shield`, `size_detection_shield`, `range_shield`, `reaction_delay_passage`, `minimum_humidity`, `maximum_humidity`, `repeatability_humidity`, `requestType`, `financial`, `allocation1`, `allocation2`, `allocation3`, `allocation4`, `budget`, `launch`, `launchI`, `ROI`, `parameterization`, `availability`, `require`, `constraints`, `interface`) VALUES (";
+        foreach($_POST as $value){
+            if(is_array($value)) {
+                $value = encode_list_to_string($value);
+            }
+            $query = $query.'"'.$value.'",';
+        }
+        $query = substr($query,0,-1);
+        $query = $query.' )';
+        $bdd->exec($query);
+    }
 	
 	//setting general data
 
@@ -62,7 +71,6 @@
     //all sensor
 
     $weight = "";
-    $communication_selected = array("3G","4G");
     $materials = array();
     $protection_id = "";
     $shock_resistance = "";
@@ -326,7 +334,7 @@
 		}
 	}
 
-    $communication_available = f_getting_com_country(decode_string_to_list($environment));
+    $communication_selected = f_getting_com_country(decode_string_to_list($_POST['use']));
 
 	//DISPLAY WORKING
 	$communication_tools = new Communication_tools();
@@ -342,7 +350,7 @@
 
 	function f_table_display($sensor,$sensors) {
 	    $download = array();
-		$data = f_table($sensor,$sensors,$GLOBALS['communication_selected']);
+		$data = f_table($sensor,$sensors);
 		foreach($data as $element){
 			if ($element->percentage > $GLOBALS['display']){
 			    $download[count($download)] = $element;
@@ -363,6 +371,24 @@
 		echo '<div class="export"><button onclick="f_ExportCSV('.$download_enc.','.$fileName.')">Export to CSV</button></div>';
 	}
 
+    echo '<div class="similar">';
+        //f_similar($email,$name,$phone,$organism,$project_title);
+    echo '</div>';
+
+    //table object connectés
+    /*echo '<div class="limiter"><div class="wrap-table100"><div class="table100 ver1 m-b-110"><div class="table100-head"><table><thead>
+        <tr class="row100 head">
+            <th class="cell100 column1">Name</th>
+            <th class="cell100 column2">Correspondence</th>
+            <th class="cell100 column3">Communications</th>
+            <th class="cell100 column4">Data Sheet</th>
+            <th class="cell100 column4">Download</th>
+            <th class="cell100 column4">Download</th>
+            <th class="cell100 column5">Recommendation</th>
+        </tr></thead></table></div><div class="table100-body js-pscroll"><table><tbody>';
+    f_connected_object($_POST,$communication_selected);
+    echo '</tbody></table></div></div></div>';*/
+
     foreach($sensor as $element) {
         if ($element === "pressure_sensor") { echo '<p class="sub_table">Pressure sensors</p>'; }
         if ($element === "distance_sensor") { echo '<p class="sub_table">Distance sensors</p>'; }
@@ -374,9 +400,6 @@
         if ($element === "position_sensor") { echo '<p class="sub_table">Position sensors</p>'; }
 		echo '
 		<div class="limiter">
-		    <div class="similar">
-		        //f_similar($email,$name,$phone,$organism,$project_title);
-		    </div>
 			<div class="wrap-table100">
 				<div class="table100 ver1 m-b-110">
 					<div class="table100-head">

@@ -10,6 +10,7 @@ require_once('DAO/DAO_passage_sensor.php');
 require_once('DAO/DAO_shield_sensor.php');
 require_once('DAO/DAO_humidity_sensor.php');
 require_once('DAO/DAO_position_sensor.php');
+require_once('DAO/DAO_connected_object.php');
 
 function f_generate_combinaison($sensor,$sensors)
 {
@@ -156,19 +157,21 @@ function f_terms_humidity($data){
 
 function f_request($conditions, $percentage, $sensor){
     $out = array();
-    $query = 'SELECT model,recommendation,communication FROM '.$sensor.' WHERE model != "" '.$conditions;
+    $query = 'SELECT model,recommendation_total,recommendation_positive,communication_tools FROM '.$sensor.' WHERE model != "" '.$conditions;
     $response = $GLOBALS['bdd']->query($query);
     if(!$response) { return null; }
     else {
         while ($data = $response->fetch()) {
-            $out[count($out)] = new Results($data['model'],$percentage,array(),$data['recommendation'],ClearString($data['communication']));
+            if($data['recommendation_total'] != 0) { $temp = $data['recommendation_positive']/$data['recommendation_total']; }
+            else { $temp = 0; }
+            $out[count($out)] = new Results($data['model'],$percentage,array(),$temp,ClearString($data['communication_tools']));
         }
     }
     if (count($out) == 0) { $out[0] = new Results("",0,array(),"",""); }
     return $out;
 }
 
-function f_table($sensor,$sensors,$communication_selected){
+function f_table($sensor,$sensors){
     $out = array();
     $combinaison_list = f_generate_combinaison($sensor,$sensors);
     if ($sensor === "pressure_sensor") {
@@ -253,7 +256,6 @@ function f_table($sensor,$sensors,$communication_selected){
     }
     $out = f_sort_order($out);
     $out = f_sort_sensor($out);
-    //$out = f_filtering_communication($out,$communication_selected);
     return $out;
 }
 
@@ -294,20 +296,20 @@ function EncodeCSV ($sensors) {
 }
 
 function f_getting_com_country($countryList){
-    $com_list = array()
+    $com_list = array();
     $query = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'communication_per_country'";
-    $response = $GLOBALS['bdd']->query(query);
+    $response = $GLOBALS['bdd']->query($query);
     if(!$response) { return null; }
     else {
         while ($data = $response->fetch()) {
             $com_list[] = $data;
         }
     }
-    $com_list = array_slice($com_list,1,count(com_list)-2);
+    $com_list = array_slice($com_list,1,count($com_list)-2);
     foreach($countryList as $country) {
         $temp = array();
         $query = "SELECT * FROM communication_per_country WHERE country = '".$country."'";
-        $response = $GLOBALS['bdd']->query(query);
+        $response = $GLOBALS['bdd']->query($query);
         if(!$response) { return null; }
         else {
             while ($data = $response->fetch()) {
@@ -320,5 +322,10 @@ function f_getting_com_country($countryList){
             }
         }
     }
+    return com_list;
+}
+
+function f_connected_object($data,$communication) {
+    $objects =
 }
 ?>

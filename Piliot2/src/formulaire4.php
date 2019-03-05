@@ -96,7 +96,7 @@
             					<option value="9">100k€</option>
             				</select><br>
 
-            				For a pilot(POC)
+            				For a pilot(POC)&emsp;&emsp;&emsp;
             				<select name="allocation2" class="styled">
             					<option value="idk">I don't know</option>
             					<option value="1">10€</option>
