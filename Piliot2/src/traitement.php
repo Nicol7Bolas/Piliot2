@@ -95,8 +95,8 @@
 
     $range_passage = $_POST['range_passage'];
     $response_time_passage = $_POST['response_time_passage'];
-    $type_passage = array();
-    if ($_POST['type_passage'][0] =! "idk")
+    $type_passage = decode_string_to_list($_POST['type_passage']);
+    if ($type_passage =! "idk")
     {
         foreach($_POST['type_passage'] as $element)
         {
