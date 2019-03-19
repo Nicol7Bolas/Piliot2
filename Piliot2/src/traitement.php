@@ -201,7 +201,7 @@
                         $maximum_temperature = 35;
                     }
                     if($element == "aer") {
-                        foreach($_POST['environment'] as $element) {
+                        foreach($environment as $element) {
                             if($element = "rct") {
                                 $maximum_temperature = 950;
                             }

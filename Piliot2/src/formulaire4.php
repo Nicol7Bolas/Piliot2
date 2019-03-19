@@ -66,6 +66,7 @@
                   <input type="hidden" name="minimum_humidity" value = <?php echo '"'.$_POST['minimum_humidity'].'"' ?> />
                   <input type="hidden" name="maximum_humidity" value = <?php echo '"'.$_POST['maximum_humidity'].'"' ?> />
                   <input type="hidden" name="repeatability_humidity" value = <?php echo '"'.$_POST['repeatability_humidity'].'"' ?> />
+                  <input type="hidden" name="type_passage" value = <?php echo '"'.$_POST['type_passage'].'"' ?> />
 				  <input type="hidden" name="requestType" value ="new"/>
 
 		      <div class="section">Financial aspect</div>

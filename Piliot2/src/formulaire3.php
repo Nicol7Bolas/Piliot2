@@ -64,7 +64,7 @@
             <input type="hidden" name="maximum_humidity" value = <?php echo '"'.$_POST['maximum_humidity'].'"' ?> />
             <input type="hidden" name="repeatability_humidity" value = <?php echo '"'.$_POST['repeatability_humidity'].'"' ?> />
 
-		    <div class="section">Environmental constraints</div>
+		    <div class="section">zal constraints</div>
     			<div>
     				<b>In what environment will the device be used ?</b><br><br>
     				<label class="container"><input type="checkbox" id="outside" name="environment[]" onclick='displayInOut("outside")' value="out"/>Only outside<span class="checkmark"></span></label>
@@ -309,7 +309,7 @@
                         <label><input type="checkbox" name="use[]" value="yem"/>Yemen</label><br>
                         <label><input type="checkbox" name="use[]" value="zam"/>Zambia</label><br>
                         <label><input type="checkbox" name="use[]" value="zim"/>Zimbabwe</label><br>
-                        <label><input type="checkbox" name="use[]" checked value="idk" style="display:none"/>Zimbabwe</label><br>
+                        <input type="checkbox" name="use[]" checked value="idk" style="display:none"/><br>
                     </div>
     			</div>
 
